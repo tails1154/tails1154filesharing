@@ -1,0 +1,29 @@
+{
+  "name": "tailsfilesharing",
+  "version": "1.0.0",
+  "description": "Tails1154 File Sharing Server",
+  "keywords": [
+    "file",
+    "sharing",
+    "filesharing"
+  ],
+  "homepage": "https://github.com/tails1154/tails1154filesharing#readme",
+  "bugs": {
+    "url": "https://github.com/tails1154/tails1154filesharing/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tails1154/tails1154filesharing.git"
+  },
+  "license": "GPL-3.0",
+  "author": "Tails1154",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "uuid": "^11.0.5"
+  }
+}
