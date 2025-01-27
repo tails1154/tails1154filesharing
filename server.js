@@ -28,7 +28,7 @@ http.createServer(function (req, res) {
     else if (path === "/version")
     {
         res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.write("1.0.0");
+        res.write("1.1.2");
         res.end();
     }
     else if (path === "/init")
@@ -101,8 +101,9 @@ http.createServer(function (req, res) {
 
                         // Too much POST data, kill the connection!
                         // 1e6 === 1 * Math.pow(10, 6) === 1 * 1000000 ~~~ 1MB
-                        if (body.length > 1e6)
-                            req.connection.destroy();
+                        // if (body.length > 1e6)
+                            // console.error("[ERR] Killed Connection: Too much POST data");
+                            // req.connection.destroy();
                     });
 
                     req.on('end', function () {
