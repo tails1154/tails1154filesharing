@@ -91,7 +91,7 @@ http.createServer(function (req, res) {
         {
             if (q.uuid == uuid1)
             {
-                uploading = true;
+                uploading = false;
                 var request = req;
                 if (req.method == 'POST') {
                     var body = '';
@@ -108,7 +108,7 @@ http.createServer(function (req, res) {
                     req.on('end', function () {
                         filedata = body;
                         res.end();
-                        uploading = false;
+                        uploading = true;
                     });
                 }
                 else {
@@ -142,7 +142,6 @@ http.createServer(function (req, res) {
         if (q.uuid && q.uuid === uuid2) {
             res.writeHead(200, { 'Content-Type': 'application/octet-stream' });
             res.write(filedata);
-            res.end();
             transfering = false;
             transfering = false;
             secondready = false;
@@ -152,6 +151,7 @@ http.createServer(function (req, res) {
             filename = "";
             filedata = "";
             uploading = false;
+            res.end();
         }
         else {
             res.writeHead(401, { 'Content-Type': 'text/plain' });
@@ -161,11 +161,11 @@ http.createServer(function (req, res) {
     else if (path === "/uploadingfile") {
         if (q.uuid && q.uuid === uuid2) {
             if (uploading) {
-                res.writeHead(900, { 'Content-Type': 'text/plain' });
+                res.writeHead(901, { 'Content-Type': 'text/plain' });
                 res.end();
             }
             else {
-                res.writeHead(901, { 'Content-Type': 'text/plain' });
+                res.writeHead(900, { 'Content-Type': 'text/plain' });
                 res.end();
             }
         }
@@ -190,6 +190,23 @@ http.createServer(function (req, res) {
         else {
             res.writeHead(200);
             res.end();
+        }
+    }
+    else if (path === "/resetserver") {
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
+        res.end();
+        if (q.password) {
+            if (q.password === "1212@Aisd") {
+                console.warn("Server has been reset!");
+                transfering = false;
+                secondready = false;
+                fileuploading = false;
+                uuid1 = uuidv4();
+                uuid2 = uuidv4();
+                filename = "";
+                filedata = "";
+                uploading = false;
+            }
         }
     }
     else
